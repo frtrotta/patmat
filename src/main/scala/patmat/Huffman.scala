@@ -106,7 +106,8 @@ object Huffman {
       case _ :: Nil => trees
       case x :: y :: Nil => List(makeCodeTree(x, y))
       case x :: y :: xs => {
-        def inOrderInclude(e: Fork, l: List[CodeTree]): List[CodeTree] = if(weight(e) <= weight(l.head)) e :: l else l
+        def inOrderInclude(e: Fork, l: List[CodeTree]): List[CodeTree] = if (weight(e) <= weight(l.head)) e :: l
+        else l
           .head ::
           inOrderInclude(e, l.tail)
         inOrderInclude(makeCodeTree(x, y), trees.drop(2))
@@ -146,7 +147,7 @@ object Huffman {
     *  - try to find sensible parameter names for `xxx`, `yyy` and `zzz`.
     */
   def until[A](endCondition: A => Boolean, iterationBody: A => A)
-           (obj: A): A = if(endCondition(obj)) obj else until(endCondition, iterationBody)(iterationBody(obj))
+              (obj: A): A = if (endCondition(obj)) obj else until(endCondition, iterationBody)(iterationBody(obj))
 
 
   // Part 3: Decoding
@@ -157,13 +158,26 @@ object Huffman {
     * The parameter `chars` is an arbitrary text. This function extracts the character
     * frequencies from that text and creates a code tree based on them.
     */
-  def createCodeTree(chars: List[Char]): CodeTree = ???
+  def createCodeTree(chars: List[Char]): CodeTree = until(singleton, combine)(makeOrderedLeafList(times(chars))).head
 
   /**
     * This function decodes the bit sequence `bits` using the code tree `tree` and returns
     * the resulting list of characters.
     */
-  def decode(tree: CodeTree, bits: List[Bit]): List[Char] = ???
+  def decode(tree: CodeTree, bits: List[Bit]): List[Char] = {
+
+    def decodeHelper(subtree: CodeTree, bits: List[Bit]): List[Char] = bits match {
+      case Nil => subtree match {
+        case Leaf(c, _) => List(c)
+      }
+      case x :: xs => subtree match {
+        case Leaf(c, _) => c :: decodeHelper(tree, bits)
+        case Fork(l, r, _, _) => if (x == 0) decodeHelper(l, xs) else decodeHelper(r, xs)
+      }
+    }
+
+    decodeHelper(tree, bits)
+  }
 
   /**
     * Write a function that returns the decoded secret
@@ -227,4 +241,5 @@ object Huffman {
   case class Fork(left: CodeTree, right: CodeTree, chars: List[Char], weight: Int) extends CodeTree
 
   case class Leaf(char: Char, weight: Int) extends CodeTree
+
 }
