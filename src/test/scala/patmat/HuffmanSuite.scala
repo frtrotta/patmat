@@ -106,4 +106,15 @@ class HuffmanSuite extends FunSuite {
     }
   }
 
+  test("mergeCodeTables") {
+    val a: CodeTable = List(('a', Nil))
+    val b: CodeTable = List(('b', Nil))
+    val r = mergeCodeTables(a, b)
+    assert(r === List(('a', List(0)), ('b', List(1))))
+
+    val c: CodeTable = List(('c', Nil))
+    val s = mergeCodeTables(c, r)
+    assert(s === List(('c', List(0)), ('a', List(1,0)), ('b', List(1,1))))
+  }
+
 }
