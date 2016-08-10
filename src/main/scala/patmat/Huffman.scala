@@ -86,7 +86,7 @@ object Huffman {
   /**
     * Checks whether the list `trees` contains only one single code tree.
     */
-  def singleton(trees: List[CodeTree]): Boolean = trees.size == 1
+  def singleton(trees: List[CodeTree]): Boolean = trees.length == 1
 
   /**
     * The parameter `trees` of this function is a list of code trees ordered
@@ -107,8 +107,7 @@ object Huffman {
       case x :: y :: Nil => List(makeCodeTree(x, y))
       case x :: y :: xs => {
         def inOrderInclude(e: Fork, l: List[CodeTree]): List[CodeTree] = if (weight(e) <= weight(l.head)) e :: l
-        else l
-          .head ::
+        else l.head ::
           inOrderInclude(e, l.tail)
         inOrderInclude(makeCodeTree(x, y), trees.drop(2))
       }
