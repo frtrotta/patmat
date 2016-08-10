@@ -101,22 +101,14 @@ object Huffman {
     * unchanged.
     */
   def combine(trees: List[CodeTree]): List[CodeTree] = {
-    /*
-    FT
-    The relevant information in combining the two trees is the weight.
-    Give that *weight* is not a member of the base class CodeTree, the use of pattern matching is required.
-    This seems a quite cumbersome solution, since it has to deal with the four (4) different combination of two
-    objects (Leaf and Fork) in pair.
-     */
     trees match {
       case Nil => Nil
       case _ :: Nil => trees
       case x :: y :: xs => {
-        def e:Fork = if (weight(x) < weight(y)) makeCodeTree(x, y) else makeCodeTree(y, x)
-        def inOrderInclude(e: Fork, l: List[CodeTree]): List[CodeTree] = if(weight(e) < weight(l.head)) e :: l else l
+        def inOrderInclude(e: Fork, l: List[CodeTree]): List[CodeTree] = if(weight(e) > weight(l.head)) e :: l else l
           .head ::
           inOrderInclude(e, l.tail)
-        inOrderInclude(e, trees.drop(2))
+        inOrderInclude(makeCodeTree(x, y), trees.drop(2))
       }
     }
   }
@@ -127,14 +119,12 @@ object Huffman {
   // Part 1: Basics
   def weight(tree: CodeTree): Int = tree match {
     case Leaf(_, w) => w
-    //case Fork(l, r, _, _) => weight(l) + weight(r)
-    case Fork(_, _, _, w) => w // TODO Choose which of the two
+    case Fork(_, _, _, w) => w
   }
 
   def chars(tree: CodeTree): List[Char] = tree match {
     case Leaf(c, _) => c :: Nil
-    //case Fork(l, r, _, _) => chars(l) ::: chars(r)
-    case Fork(_, _, cc, _) => cc // TODO Choose which of the two
+    case Fork(_, _, cc, _) => cc
   }
 
   /**
