@@ -188,58 +188,69 @@ object Huffman {
     * This function encodes `text` using the code tree `tree`
     * into a sequence of bits.
     */
-  def encode(tree: CodeTree)(text: List[Char]): List[Bit] = ???
+  def encode(tree: CodeTree)(text: List[Char]): List[Bit] = {
+    def encodeHelper(subtree: CodeTree)(text: List[Char]): List[Bit] = text match {
+      case Nil => Nil
+      case x :: xs =>
+        subtree match {
+          case Leaf(_, _) => encodeHelper(tree)(xs)
+          case Fork(l, r, _, _) => if (chars(l).contains(x)) 0 :: encodeHelper(l)(text) else 1 :: encodeHelper(r)(text)
+        }
+    }
 
-  /**
-    * This function returns the bit sequence that represents the character `char` in
-    * the code table `table`.
-    */
-  def codeBits(table: CodeTable)(char: Char): List[Bit] = ???
+    encodeHelper (tree)(text)
+    }
+
+    /**
+      * This function returns the bit sequence that represents the character `char` in
+      * the code table `table`.
+      */
+    def codeBits(table: CodeTable)(char: Char): List[Bit] = ???
 
 
-  // Part 4a: Encoding using Huffman tree
+    // Part 4a: Encoding using Huffman tree
 
-  /**
-    * Given a code tree, create a code table which contains, for every character in the
-    * code tree, the sequence of bits representing that character.
-    *
-    * Hint: think of a recursive solution: every sub-tree of the code tree `tree` is itself
-    * a valid code tree that can be represented as a code table. Using the code tables of the
-    * sub-trees, think of how to build the code table for the entire tree.
-    */
-  def convert(tree: CodeTree): CodeTable = ???
+    /**
+      * Given a code tree, create a code table which contains, for every character in the
+      * code tree, the sequence of bits representing that character.
+      *
+      * Hint: think of a recursive solution: every sub-tree of the code tree `tree` is itself
+      * a valid code tree that can be represented as a code table. Using the code tables of the
+      * sub-trees, think of how to build the code table for the entire tree.
+      */
+    def convert(tree: CodeTree): CodeTable = ???
 
-  // Part 4b: Encoding using code table
+    // Part 4b: Encoding using code table
 
-  /**
-    * This function takes two code tables and merges them into one. Depending on how you
-    * use it in the `convert` method above, this merge method might also do some transformations
-    * on the two parameter code tables.
-    */
-  def mergeCodeTables(a: CodeTable, b: CodeTable): CodeTable = ???
+    /**
+      * This function takes two code tables and merges them into one. Depending on how you
+      * use it in the `convert` method above, this merge method might also do some transformations
+      * on the two parameter code tables.
+      */
+    def mergeCodeTables(a: CodeTable, b: CodeTable): CodeTable = ???
 
-  /**
-    * This function encodes `text` according to the code tree `tree`.
-    *
-    * To speed up the encoding process, it first converts the code tree to a code table
-    * and then uses it to perform the actual encoding.
-    */
-  def quickEncode(tree: CodeTree)(text: List[Char]): List[Bit] = ???
+    /**
+      * This function encodes `text` according to the code tree `tree`.
+      *
+      * To speed up the encoding process, it first converts the code tree to a code table
+      * and then uses it to perform the actual encoding.
+      */
+    def quickEncode(tree: CodeTree)(text: List[Char]): List[Bit] = ???
 
-  /**
-    * A huffman code is represented by a binary tree.
-    *
-    * Every `Leaf` node of the tree represents one character of the alphabet that the tree can encode.
-    * The weight of a `Leaf` is the frequency of appearance of the character.
-    *
-    * The branches of the huffman tree, the `Fork` nodes, represent a set containing all the characters
-    * present in the leaves below it. The weight of a `Fork` node is the sum of the weights of these
-    * leaves.
-    */
-  abstract class CodeTree
+    /**
+      * A huffman code is represented by a binary tree.
+      *
+      * Every `Leaf` node of the tree represents one character of the alphabet that the tree can encode.
+      * The weight of a `Leaf` is the frequency of appearance of the character.
+      *
+      * The branches of the huffman tree, the `Fork` nodes, represent a set containing all the characters
+      * present in the leaves below it. The weight of a `Fork` node is the sum of the weights of these
+      * leaves.
+      */
+    abstract class CodeTree
 
-  case class Fork(left: CodeTree, right: CodeTree, chars: List[Char], weight: Int) extends CodeTree
+    case class Fork(left: CodeTree, right: CodeTree, chars: List[Char], weight: Int) extends CodeTree
 
-  case class Leaf(char: Char, weight: Int) extends CodeTree
+    case class Leaf(char: Char, weight: Int) extends CodeTree
 
-}
+  }
