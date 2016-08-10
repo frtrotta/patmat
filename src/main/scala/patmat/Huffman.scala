@@ -106,7 +106,7 @@ object Huffman {
       case _ :: Nil => trees
       case x :: y :: Nil => List(makeCodeTree(x, y))
       case x :: y :: xs => {
-        def inOrderInclude(e: Fork, l: List[CodeTree]): List[CodeTree] = if(weight(e) < weight(l.head)) e :: l else l
+        def inOrderInclude(e: Fork, l: List[CodeTree]): List[CodeTree] = if(weight(e) <= weight(l.head)) e :: l else l
           .head ::
           inOrderInclude(e, l.tail)
         inOrderInclude(makeCodeTree(x, y), trees.drop(2))
