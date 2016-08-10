@@ -117,4 +117,14 @@ class HuffmanSuite extends FunSuite {
     assert(s === List(('c', List(0)), ('a', List(1,0)), ('b', List(1,1))))
   }
 
+  test("convert") {
+    new TestTrees {
+      val ct1 = convert(t1)
+      assert(ct1 === List(('a', List(0)), ('b', List(1))))
+
+      val ct2 = convert(t2)
+      assert(ct2 === List(('a', List(0, 0)), ('b', List(0, 1)), ('d', List(1))))
+    }
+  }
+
 }
