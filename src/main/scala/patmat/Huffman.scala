@@ -105,7 +105,7 @@ object Huffman {
       case Nil => Nil
       case _ :: Nil => trees
       case x :: y :: xs => {
-        def inOrderInclude(e: Fork, l: List[CodeTree]): List[CodeTree] = if(weight(e) > weight(l.head)) e :: l else l
+        def inOrderInclude(e: Fork, l: List[CodeTree]): List[CodeTree] = if(weight(e) < weight(l.head)) e :: l else l
           .head ::
           inOrderInclude(e, l.tail)
         inOrderInclude(makeCodeTree(x, y), trees.drop(2))
@@ -144,7 +144,9 @@ object Huffman {
     * the example invocation. Also define the return type of the `until` function.
     *  - try to find sensible parameter names for `xxx`, `yyy` and `zzz`.
     */
-  def until(xxx: ???, yyy: ???)(zzz: ???): ??? = ???
+  def until(endCondition: (List[CodeTree]) => Boolean, iterationBody: (List[CodeTree]) => List[CodeTree])(collection:
+                                                                                            List[CodeTree]):
+  List[CodeTree] = if(endCondition(collection)) collection else iterationBody(collection)
 
 
   // Part 3: Decoding
