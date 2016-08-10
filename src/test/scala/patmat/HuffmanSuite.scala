@@ -127,4 +127,13 @@ class HuffmanSuite extends FunSuite {
     }
   }
 
+  test("quickEncode") {
+    new TestTrees {
+      val abbab = "abbab".toList
+      val abbadbad = "abbadbad".toList
+      assert(encode(t1)(abbab) === quickEncode(t1)(abbab))
+      assert(encode(t2)(abbadbad) === quickEncode(t2)(abbadbad))
+    }
+  }
+
 }
