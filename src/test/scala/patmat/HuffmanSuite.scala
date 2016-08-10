@@ -47,10 +47,34 @@ class HuffmanSuite extends FunSuite {
     assert(makeOrderedLeafList(List(('t', 2), ('e', 1), ('x', 3))) === List(Leaf('e',1), Leaf('t',2), Leaf('x',3)))
   }
 
+  test("singleton") {
+    val leaflist = List(Leaf('e', 1), Leaf('t', 2), Leaf('x', 4))
+    assert(!singleton(leaflist))
+    assert(!singleton(leaflist.drop(1)))
+    assert(singleton(leaflist.drop(2)))
+    assert(!singleton(Nil))
+
+    val ll = List(Fork(Leaf('e',1),Leaf('t',2),List('e', 't'),3), Leaf('x',4))
+    assert(!singleton(ll))
+  }
+
 
   test("combine of some leaf list") {
     val leaflist = List(Leaf('e', 1), Leaf('t', 2), Leaf('x', 4))
-    assert(combine(leaflist) === List(Fork(Leaf('e',1),Leaf('t',2),List('e', 't'),3), Leaf('x',4)))
+    val ll1 = combine(leaflist)
+    val ll2 = combine(ll1)
+    val ll3 = combine(ll2)
+    assert(ll1 === List(Fork(Leaf('e',1),Leaf('t',2),List('e', 't'),3), Leaf('x',4)))
+    assert(ll2 === List(Fork(Fork(Leaf('e',1),Leaf('t',2),List('e', 't'),3), Leaf('x',4), List('e', 't', 'x'), 7)))
+    assert(ll3 === ll2, ll3)
+  }
+
+  test("until") {
+    val leaflist = List(Leaf('e', 1), Leaf('t', 2), Leaf('x', 4))
+    val r = combine(leaflist)
+    val e = Fork(Fork(Leaf('e', 1), Leaf('t', 2), List('e', 't'), 3), Leaf('x', 4), List('e', 't', 'x'), 7)
+    assert(r.size === 1, "combine must keep on working until there is only one CodeTree" + r)
+    assert(r === e)
   }
 
 
