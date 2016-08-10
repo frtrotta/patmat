@@ -111,17 +111,10 @@ object Huffman {
     trees match {
       case Nil => Nil
       case _ :: Nil => trees
-      case _ :: _ :: xs => {
-        def t0 = trees(0)
-        def t1 = trees(1)
-        def joinTrees(w0: Int, w1: Int): CodeTree = if (w0 < w1) makeCodeTree(t0, t1) else makeCodeTree(t1, t0)
-        def e = trees match {
-          case Leaf(_, w0) :: Leaf(_, w1) :: xs => joinTrees(w0, w1)
-          case Leaf(_, w0) :: Fork(_, _, _, w1) :: xs => joinTrees(w0, w1)
-          case Fork(_, _, _, w0) :: Leaf(_, w1) :: xs => joinTrees(w0, w1)
-          case Fork(_, _, _, w0) :: Fork(_, _, _, w1) :: xs => joinTrees(w0, w1)
-        }
-        def inOrderInclude(e: Fork, l: List[CodeTree]): List[CodeTree] = if(e < l.head) e :: l else l.head ::
+      case x :: y :: xs => {
+        def e:Fork = if (weight(x) < weight(y)) makeCodeTree(x, y) else makeCodeTree(y, x)
+        def inOrderInclude(e: Fork, l: List[CodeTree]): List[CodeTree] = if(weight(e) < weight(l.head)) e :: l else l
+          .head ::
           inOrderInclude(e, l.tail)
         inOrderInclude(e, trees.drop(2))
       }
