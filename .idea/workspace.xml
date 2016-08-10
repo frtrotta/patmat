@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="220685d3-da2b-40ed-a525-e05940c8dd84" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dictionaries/francescotrotta.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/patmat/Huffman.scala" afterPath="$PROJECT_DIR$/src/main/scala/patmat/Huffman.scala" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/scala/patmat/HuffmanSuite.scala" afterPath="$PROJECT_DIR$/src/test/scala/patmat/HuffmanSuite.scala" />
     </list>
     <ignored path="progfun1-patmat.iws" />
@@ -35,21 +31,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Huffman.scala" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Huffman.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/scala/patmat/Huffman.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="106" column="51" selection-start-line="106" selection-start-column="51" selection-end-line="106" selection-end-column="51" />
+            <state relative-caret-position="-717">
+              <caret line="108" column="88" selection-start-line="108" selection-start-column="88" selection-end-line="108" selection-end-column="88" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HuffmanSuite.scala" pinned="false" current-in-tab="false">
+      <file leaf-file-name="HuffmanSuite.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/scala/patmat/HuffmanSuite.scala">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="300">
-              <caret line="66" column="4" selection-start-line="66" selection-start-column="4" selection-end-line="66" selection-end-column="4" />
+              <caret line="74" column="113" selection-start-line="74" selection-start-column="113" selection-end-line="74" selection-end-column="113" />
               <folding />
             </state>
           </provider>
@@ -68,8 +64,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/test/scala/patmat/HuffmanSuite.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/patmat/Huffman.scala" />
+        <option value="$PROJECT_DIR$/src/test/scala/patmat/HuffmanSuite.scala" />
       </list>
     </option>
   </component>
@@ -526,7 +522,21 @@
       <option name="project" value="LOCAL" />
       <updated>1470818942500</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Fixed a bug in combine, that would cause al invocation on a list of exactly two elements to fail">
+      <created>1470821787058</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1470821787058</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Minor improvement on combine">
+      <created>1470821875139</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1470821875139</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -571,7 +581,9 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <MESSAGE value="combine completed.&#10;The provided test requires the binary tree to have the heaviest child on the right, while the picture in the description shows the heaviest child on the left&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="combine completed.&#10;The provided test requires the binary tree to have the heaviest child on the right, while the picture in the description shows the heaviest child on the left&#10;" />
+    <MESSAGE value="Fixed a bug in combine, that would cause al invocation on a list of exactly two elements to fail" />
+    <MESSAGE value="Minor improvement on combine" />
+    <option name="LAST_COMMIT_MESSAGE" value="Minor improvement on combine" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -613,18 +625,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/scala/patmat/HuffmanSuite.scala">
+    <entry file="file://$PROJECT_DIR$/src/main/scala/patmat/Huffman.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="66" column="4" selection-start-line="66" selection-start-column="4" selection-end-line="66" selection-end-column="4" />
+        <state relative-caret-position="-717">
+          <caret line="108" column="88" selection-start-line="108" selection-start-column="88" selection-end-line="108" selection-end-column="88" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/patmat/Huffman.scala">
+    <entry file="file://$PROJECT_DIR$/src/test/scala/patmat/HuffmanSuite.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="106" column="51" selection-start-line="106" selection-start-column="51" selection-end-line="106" selection-end-column="51" />
+        <state relative-caret-position="300">
+          <caret line="74" column="113" selection-start-line="74" selection-start-column="113" selection-end-line="74" selection-end-column="113" />
           <folding />
         </state>
       </provider>

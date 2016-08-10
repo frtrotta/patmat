@@ -71,9 +71,9 @@ class HuffmanSuite extends FunSuite {
 
   test("until") {
     val leaflist = List(Leaf('e', 1), Leaf('t', 2), Leaf('x', 4))
-    val r = combine(leaflist)
-    val e = Fork(Fork(Leaf('e', 1), Leaf('t', 2), List('e', 't'), 3), Leaf('x', 4), List('e', 't', 'x'), 7)
-    assert(r.size === 1, "combine must keep on working until there is only one CodeTree" + r)
+    val r = until(singleton, combine)(leaflist)
+    val e = List(Fork(Fork(Leaf('e', 1), Leaf('t', 2), List('e', 't'), 3), Leaf('x', 4), List('e', 't', 'x'), 7))
+    assert(r.size === 1, "until must keep on working until there is only one CodeTree" + r)
     assert(r === e)
   }
 
